@@ -18,7 +18,6 @@ class TwoFAController extends Controller
      */
     public function index()
     {
-        // resources/views/auth/2fa/2fa.blade.php
         return view('auth.2fa.2fa');
     }
 
