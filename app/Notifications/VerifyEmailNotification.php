@@ -40,7 +40,7 @@ class VerifyEmailNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('/verify-email/' . $notifiable->id . '/' . $notifiable->email_verification_token);
+        $url = url('/verify-email/' . $notifiable->id . '/' . $notifiable->verification_token);
 
         return (new MailMessage())
                     ->greeting('¡Hola ' . $notifiable->name . '!')

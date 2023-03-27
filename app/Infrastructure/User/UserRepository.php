@@ -32,6 +32,8 @@ class UserRepository implements UserRepositoryInterface
         $userModel->password = Hash::make($user->password()->value());
         $userModel->created_at = DateTimeValueObject::now()->value();
 
+        $userModel->verification_token = \Illuminate\Support\Str::random(40);
+
         $userModel->save();
 
         $userModel->sendEmailVerificationNotification();

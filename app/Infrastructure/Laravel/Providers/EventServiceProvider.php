@@ -4,6 +4,9 @@ namespace App\Infrastructure\Laravel\Providers;
 
 use App\Domain\Employees\Events\EmployeeSession;
 use App\Domain\Employees\EventListeners\EmployeeAttempLogin;
+use App\Domain\Employees\EventListeners\UserLogin;
+use App\Domain\Employees\Events\UserSession;
+use Illuminate\Auth\Events\Authenticated;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,7 +25,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         EmployeeSession::class => [
             EmployeeAttempLogin::class
-        ]
+        ],
+        UserSession::class => [
+            UserLogin::class
+        ],
     ];
 
     /**

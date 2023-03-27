@@ -26,6 +26,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'phone',
         'role_id',
         'password',
+        'email_verified_at',
+        'last_session',
+        'verification_token',
         'updated_at',
     ];
 
@@ -46,6 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'last_session' => 'datetime',
     ];
 
     public function role()
@@ -66,5 +70,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function hasVerifiedEmail()
     {
         return $this->email_verified_at !== null;
+    }
+
+    public function markEmailAsVerified()
+    {
+        $this->email_verified_at = $this->freshTimestamp();
+        $this->verification_token = null;
+        return $this->save();
     }
 }

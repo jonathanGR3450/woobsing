@@ -63,5 +63,6 @@ class Http extends HttpKernel
         'signed' => \App\Infrastructure\Laravel\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \App\Infrastructure\Laravel\Middleware\EnsureEmailIsVerified::class,
+        'lastsession' => \App\Infrastructure\Laravel\Middleware\VerifieLastSession::class,
     ];
 }

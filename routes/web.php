@@ -20,6 +20,8 @@ Route::get('/', function () {
 });
 
 Route::get('verify', [AuthController::class, 'verify'])->name('verify');
+Route::post('verify-resend', [AuthController::class, 'verifyResend'])->name('verification.resend');
+Route::get('verify-email/{id}/{hash}', [AuthController::class, 'verifyMail'])->name('verify.mail');
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('form-login', [AuthController::class, 'loginPost'])->name('login.post');
 Route::get('registration', [AuthController::class, 'registration'])->name('register');
@@ -28,11 +30,12 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('employee/form/login', 'Employees\EmployeeFrontController@loginEmployee')->name('employee.login.form');
 Route::post('employee/login', 'Employees\LoginEmployeeController')->name('employee.login.post');
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'lastsession'])->group(function () {
     # module employees front
     Route::get('employee/form', 'Employees\EmployeeFrontController@create')->name('employee.create');
     Route::get('employee/csv', 'Employees\EmployeeFrontController@uploadCsv')->name('employee.upload.csv');
 
+    Route::get('sessions', 'Employees\IndexSessionsController')->name('employees.sessions');
     Route::get('employees', 'Employees\IndexEmployeeController')->name('employees.index');
     Route::get('employees/{id}', 'Employees\ShowEmployeeController')->name('employee.edit');
     Route::get('employees/history/{id}', 'Employees\HistoryEmployeeController')->name('employee.history');
@@ -46,6 +49,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('employeescsv', 'Employees\CreateEmployeesFromCSVController')->name('employee.csv');
 });
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
