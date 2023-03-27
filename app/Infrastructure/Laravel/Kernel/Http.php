@@ -64,5 +64,6 @@ class Http extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \App\Infrastructure\Laravel\Middleware\EnsureEmailIsVerified::class,
         'lastsession' => \App\Infrastructure\Laravel\Middleware\VerifieLastSession::class,
+        '2fa' => \App\Infrastructure\Laravel\Middleware\Check2FA::class,
     ];
 }

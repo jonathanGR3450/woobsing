@@ -1,6 +1,7 @@
 <?php
 
 use App\UserInterface\Controller\Auth\AuthController;
+use App\UserInterface\Controller\Auth\TwoFAController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,10 @@ Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
+Route::get('2fa', [TwoFAController::class, 'index'])->name('2fa.index');
+Route::post('2fa', [TwoFAController::class, 'store'])->name('2fa.post');
+Route::get('2fa/reset', [TwoFAController::class, 'resend'])->name('2fa.resend');
+
 Route::get('verify', [AuthController::class, 'verify'])->name('verify');
 Route::post('verify-resend', [AuthController::class, 'verifyResend'])->name('verification.resend');
 Route::get('verify-email/{id}/{hash}', [AuthController::class, 'verifyMail'])->name('verify.mail');
@@ -30,7 +35,7 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('employee/form/login', 'Employees\EmployeeFrontController@loginEmployee')->name('employee.login.form');
 Route::post('employee/login', 'Employees\LoginEmployeeController')->name('employee.login.post');
-Route::middleware(['auth', 'verified', 'lastsession'])->group(function () {
+Route::middleware(['auth', 'verified', 'lastsession', '2fa'])->group(function () {
     # module employees front
     Route::get('employee/form', 'Employees\EmployeeFrontController@create')->name('employee.create');
     Route::get('employee/csv', 'Employees\EmployeeFrontController@uploadCsv')->name('employee.upload.csv');

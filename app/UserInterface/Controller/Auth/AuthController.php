@@ -63,14 +63,11 @@ class AuthController extends Controller
         if (!$login) {
             return redirect("login")->with('status', 'Oppes! You have entered invalid credentials');
         }
+        Auth::user()->generateCode();
         // event(new UserSession('origin_sesion', 'valor_cookie', 60));
         // dd(request()->cookie('origin_sesion'));
 
-        $response = redirect()->intended('dashboard')->with('status', 'You have Successfully loggedin');
-
-        if (Auth::user()->role_id == 1 && $request->ip() == "172.20.0.1") {
-            $response->withCookie(cookie('origin_sesion', Carbon::now(), 60));
-        }
+        $response = redirect()->route('2fa.index');
 
         return $response;
     }

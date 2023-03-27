@@ -2,12 +2,11 @@
 
 namespace App\Infrastructure\Laravel\Middleware;
 
-use Carbon\Carbon;
 use Closure;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\Request;
+use Session;
 
-class VerifieLastSession
+class Check2FA
 {
     /**
      * Handle an incoming request.
@@ -18,15 +17,8 @@ class VerifieLastSession
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = $request->user();
-        $lastSession = $user->last_session;
-        $user->last_session = Carbon::now();
-        $user->save();
-
-        if (!empty($lastSession) && $lastSession->diffInDays(Carbon::now()) >= 1) {
-            return $request->expectsJson()
-                        ? abort(403, 'Error')
-                        : redirect()->route('employees.sessions');
+        if (!Session::has('user_2fa')) {
+            return redirect()->route('2fa.index');
         }
 
         return $next($request);
