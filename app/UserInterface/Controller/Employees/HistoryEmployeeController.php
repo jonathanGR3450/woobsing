@@ -19,7 +19,7 @@ class HistoryEmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request, string $id): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+    public function __invoke(Request $request, int $id): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         // dd($request->all());
         $histories = $this->historyEmployeeUseCase->__invoke(

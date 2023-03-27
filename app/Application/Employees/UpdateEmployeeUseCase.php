@@ -16,9 +16,9 @@ final class UpdateEmployeeUseCase
         $this->employeeRepositoryInterface = $employeeRepositoryInterface;
     }
 
-    public function __invoke(string $first_name, string $last_name, string $department, bool $has_access, string $id): Employee
+    public function __invoke(string $first_name, string $last_name, string $department, bool $has_access, int $id): Employee
     {
-        $employee = $this->employeeRepositoryInterface->findById(Id::fromPrimitives($id));
+        $employee = $this->employeeRepositoryInterface->findById(Id::fromInteger($id));
 
         if($first_name){
             $employee->updateFirstName($first_name);

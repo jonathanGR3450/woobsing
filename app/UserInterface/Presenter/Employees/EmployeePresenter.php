@@ -15,7 +15,7 @@ class EmployeePresenter {
 
     public function getId()
     {
-        return $this->employee->id()->value();
+        return $this->employee->id()?->value();
     }
 
     public function getFirstName()
@@ -60,6 +60,6 @@ class EmployeePresenter {
 
     public function link()
     {
-        return new HtmlString("<a href=" . route('user.show', $this->employee->id()->value()) . ">" . $this->getFullName()."</a>");
+        return new HtmlString("<a href=" . route('user.show', $this->employee->id()?->value()) . ">" . $this->getFullName()."</a>");
     }
 }

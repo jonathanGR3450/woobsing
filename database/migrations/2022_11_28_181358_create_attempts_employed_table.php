@@ -16,7 +16,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('attempts_employed', function (Blueprint $table) {
-            $table->ulid('id')->primary();
+            $table->id();
             $table->foreignIdFor(Employee::class);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));

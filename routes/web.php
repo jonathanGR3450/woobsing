@@ -19,6 +19,7 @@ Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
+Route::get('verify', [AuthController::class, 'verify'])->name('verify');
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('form-login', [AuthController::class, 'loginPost'])->name('login.post');
 Route::get('registration', [AuthController::class, 'registration'])->name('register');
@@ -27,7 +28,7 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('employee/form/login', 'Employees\EmployeeFrontController@loginEmployee')->name('employee.login.form');
 Route::post('employee/login', 'Employees\LoginEmployeeController')->name('employee.login.post');
-Route::group(['middleware' => 'auth'], function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     # module employees front
     Route::get('employee/form', 'Employees\EmployeeFrontController@create')->name('employee.create');
     Route::get('employee/csv', 'Employees\EmployeeFrontController@uploadCsv')->name('employee.upload.csv');
@@ -44,3 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('employeesreport', 'Employees\PDFReportEmployeesController')->name('employee.pdf');
     Route::post('employeescsv', 'Employees\CreateEmployeesFromCSVController')->name('employee.csv');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

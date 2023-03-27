@@ -16,9 +16,9 @@ final class ShowEmployeeUseCase
         $this->employeeRepositoryInterface = $employeeRepositoryInterface;
     }
 
-    public function __invoke(string $id): Employee
+    public function __invoke(int $id): Employee
     {
-        $employee = $this->employeeRepositoryInterface->findById(Id::fromPrimitives($id));
+        $employee = $this->employeeRepositoryInterface->findById(Id::fromInteger($id));
 
         return $employee;
     }

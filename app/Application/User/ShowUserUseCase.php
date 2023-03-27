@@ -21,9 +21,9 @@ final class ShowUserUseCase
         $this->userRepositoryInterface = $userRepositoryInterface;
     }
 
-    public function __invoke(string $id): User
+    public function __invoke(int $id): User
     {
-        $user = $this->userRepositoryInterface->findById(Id::fromPrimitives($id));
+        $user = $this->userRepositoryInterface->findById(Id::fromInteger($id));
 
         return $user;
     }

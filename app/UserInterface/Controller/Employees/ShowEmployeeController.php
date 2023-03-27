@@ -20,7 +20,7 @@ class ShowEmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(string $id): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+    public function __invoke(int $id): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         $employee = $this->showEmployeeUseCase->__invoke($id);
         return view('employees.edit', compact('employee'));

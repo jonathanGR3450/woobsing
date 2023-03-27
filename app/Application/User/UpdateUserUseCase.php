@@ -20,9 +20,9 @@ final class UpdateUserUseCase
         $this->userRepositoryInterface = $userRepositoryInterface;
     }
 
-    public function __invoke(string $name, string $email, string $password, string $id): User
+    public function __invoke(string $name, string $email, string $password, int $id): User
     {
-        $user = $this->userRepositoryInterface->findById(Id::fromPrimitives($id));
+        $user = $this->userRepositoryInterface->findById(Id::fromInteger($id));
 
         if($name){
             $user->updateName($name);

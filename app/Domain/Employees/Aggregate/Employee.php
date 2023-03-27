@@ -18,36 +18,36 @@ use PDF;
 class Employee implements EmployeeInterface
 {
     private function __construct(
-        private Id $id,
         private FirstName $first_name,
         private LastName $last_name,
         private Department $department,
         private HasAccess $has_access,
         private DateTimeValueObject $created_at,
-        private ?DateTimeValueObject $updated_at,
+        private ?DateTimeValueObject $updated_at = null,
         private ?Attempts $attempts,
+        private ?Id $id = null,
     ) {
     }
 
     public static function create(
-        Id $id,
         FirstName $first_name,
         LastName $last_name,
         Department $department,
         HasAccess $has_access,
         DateTimeValueObject $created_at,
         ?DateTimeValueObject $updated_at = null,
-        ?Attempts $attempts = null
+        ?Attempts $attempts = null,
+        ?Id $id = null,
     ): self {
         return new self(
-            $id,
             $first_name,
             $last_name,
             $department,
             $has_access,
             $created_at,
             $updated_at,
-            $attempts
+            $attempts,
+            $id
         );
     }
 
@@ -78,7 +78,7 @@ class Employee implements EmployeeInterface
         return $pdf;
     }
 
-    public function id(): Id
+    public function id(): ?Id
     {
         return $this->id;
     }
@@ -151,7 +151,7 @@ class Employee implements EmployeeInterface
     public function asArray(): array
     {
         return [
-            'id' => $this->id()->value(),
+            'id' => $this->id()?->value(),
             'first_name' => $this->firstName()->value(),
             'last_name' => $this->lastName()->value(),
             'department' => $this->department()->value(),

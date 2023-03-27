@@ -25,7 +25,6 @@ class EmployeeRepository implements EmployeeRepositoryInterface
     {
         $employeeModel = new ModelsEmployee();
 
-        $employeeModel->id = $employee->id()->value();
         $employeeModel->first_name = $employee->firstName()->value();
         $employeeModel->last_name = $employee->lastName()->value();
         $employeeModel->department = $employee->department()->value();
@@ -44,7 +43,6 @@ class EmployeeRepository implements EmployeeRepositoryInterface
     {
         $employeeModel = ModelsEmployee::find($employee->id()->value());
 
-        $employeeModel->id = $employee->id()->value();
         $employeeModel->first_name = $employee->firstName()->value();
         $employeeModel->last_name = $employee->lastName()->value();
         $employeeModel->department = $employee->department()->value();
@@ -128,7 +126,6 @@ class EmployeeRepository implements EmployeeRepositoryInterface
             ->select('employees.*', 'attempts_employed.employee_id', DB::raw('COUNT(attempts_employed.id) as attempts'))
             ->groupBy('employees.id', 'attempts_employed.employee_id');
         
-            // dd($employeeModel->get()->toArray());
 
         return array_map(
             static fn (ModelsEmployee $employee) => $employee->id ? self::map($employee) : self::mapIntruder($employee),
@@ -155,7 +152,6 @@ class EmployeeRepository implements EmployeeRepositoryInterface
     public static function map(ModelsEmployee $model): Employee
     {
         return Employee::create(
-            Id::fromPrimitives($model->id),
             FirstName::fromString($model->first_name),
             LastName::fromString($model->last_name),
             Department::fromString($model->department),
@@ -163,6 +159,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface
             DateTimeValueObject::fromPrimitives($model->created_at->__toString()),
             !empty($model->updated_at) ? DateTimeValueObject::fromPrimitives($model->updated_at->__toString()) : null,
             Attempts::fromInteger($model->attempts ?? 0),
+            Id::fromInteger($model->id),
         );
     }
 
@@ -170,7 +167,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface
     {
         // dd($model->employee_id);
         return Intruder::createIntruder(
-            Id::fromPrimitives($model->employee_id),
+            Id::fromInteger($model->employee_id),
             !empty($model->created_at) ? DateTimeValueObject::fromPrimitives($model->created_at->__toString()) : null,
             !empty($model->updated_at) ? DateTimeValueObject::fromPrimitives($model->updated_at->__toString()) : null,
             Attempts::fromInteger($model->attempts ?? 0),

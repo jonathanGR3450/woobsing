@@ -21,6 +21,11 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
+    public function verify()
+    {
+        return view('auth.verify');
+    }
+
     public function loginPost(LoginFormRequest $request)
     {
         $login = $this->authUserInterface->loginCredentials($request->input('email'), $request->input('password'));
@@ -39,7 +44,7 @@ class AuthController extends Controller
 
     public function registrationPost(RegisterFormRequest $request)
     {
-        $user = $this->authUserInterface->createUser($request->input('name'), $request->input('email'), $request->input('password'));
+        $user = $this->authUserInterface->createUser($request->input('name'), $request->input('email'), $request->input('phone'), $request->input('role_id'), $request->input('password'));
 
         return redirect("login")->with('status', 'You have signed-in');
     }

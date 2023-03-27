@@ -21,7 +21,7 @@ class UpdateUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request, string $id)
+    public function __invoke(Request $request, int $id)
     {
         $user = $this->updateUserUseCase->__invoke($request->input('name'), $request->input('email'), $request->input('password'), $id);
 

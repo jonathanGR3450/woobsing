@@ -42,6 +42,7 @@ class IndexEmployeeController extends Controller
             $date_end,
             $id,
         );
+        // dd($employees);
 
         return view('dashboard', compact('employees', 'first_name', 'last_name', 'department', 'has_access', 'date_init', 'date_end', 'id'));
     }

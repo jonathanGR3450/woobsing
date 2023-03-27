@@ -16,9 +16,9 @@ final class DestroyUserUseCase
         $this->userRepositoryInterface = $userRepositoryInterface;
     }
 
-    public function __invoke(string $id): void
+    public function __invoke(int $id): void
     {
-        $user = $this->userRepositoryInterface->findById(Id::fromPrimitives($id));
+        $user = $this->userRepositoryInterface->findById(Id::fromInteger($id));
         $this->userRepositoryInterface->delete($user);
     }
 }

@@ -21,7 +21,7 @@ class UpdateEmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request, string $id)
+    public function __invoke(Request $request, int $id)
     {
         $this->updateEmployeeUseCase->__invoke($request->input('first_name'), $request->input('last_name'), $request->input('department'), (bool) $request->input('has_access'), $id);
 

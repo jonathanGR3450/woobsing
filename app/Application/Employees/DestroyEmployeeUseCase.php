@@ -15,9 +15,9 @@ final class DestroyEmployeeUseCase
         $this->employeeRepositoryInterface = $employeeRepositoryInterface;
     }
 
-    public function __invoke(string $id): void
+    public function __invoke(int $id): void
     {
-        $user = $this->employeeRepositoryInterface->findById(Id::fromPrimitives($id));
+        $user = $this->employeeRepositoryInterface->findById(Id::fromInteger($id));
         $this->employeeRepositoryInterface->delete($user);
     }
 }

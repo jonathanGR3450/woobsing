@@ -13,6 +13,8 @@ use App\Domain\User\ValueObjects\Email;
 use App\Domain\User\ValueObjects\Id;
 use App\Domain\User\ValueObjects\Name;
 use App\Domain\User\ValueObjects\Password;
+use App\Domain\User\ValueObjects\Phone;
+use App\Domain\User\ValueObjects\RoleId;
 use App\Infrastructure\Laravel\Models\User as ModelsUser;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,22 +25,26 @@ class UserRepository implements UserRepositoryInterface
     {
         $userModel = new ModelsUser();
 
-        $userModel->id = $user->id()->value();
         $userModel->email = $user->email()->value();
         $userModel->name = $user->name()->value();
+        $userModel->phone = $user->phone()->value();
+        $userModel->role_id = $user->roleId()->value();
         $userModel->password = Hash::make($user->password()->value());
         $userModel->created_at = DateTimeValueObject::now()->value();
 
         $userModel->save();
+
+        $userModel->sendEmailVerificationNotification();
     }
 
     public function update(User $user): void
     {
         $userModel = ModelsUser::find($user->id()->value());
 
-        $userModel->id = $user->id()->value();
         $userModel->email = $user->email()->value();
         $userModel->name = $user->name()->value();
+        $userModel->phone = $user->phone()->value();
+        $userModel->role_id = $user->roleId()->value();
         $userModel->updated_at = DateTimeValueObject::now()->value();
 
         $userModel->save();
@@ -110,12 +116,14 @@ class UserRepository implements UserRepositoryInterface
     public static function map(ModelsUser $model): User
     {
         return User::create(
-            Id::fromPrimitives($model->id),
             Email::fromString($model->email),
             Name::fromString($model->name),
+            Phone::fromString($model->phone),
+            RoleId::fromInteger($model->role_id),
             Password::fromString($model->password),
             DateTimeValueObject::fromPrimitives($model->created_at->__toString()),
             !empty($model->updated_at) ? DateTimeValueObject::fromPrimitives($model->updated_at->__toString()) : null,
+            Id::fromInteger($model->id),
         );
     }
 }

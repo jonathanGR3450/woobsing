@@ -17,7 +17,6 @@ use App\UserInterface\Presenter\Employees\EmployeePresenter;
 interface EmployeeInterface
 {
     public static function create(
-        Id $id,
         FirstName $first_name,
         LastName $last_name,
         Department $department,
@@ -25,9 +24,10 @@ interface EmployeeInterface
         DateTimeValueObject $created_at,
         ?DateTimeValueObject $updated_at = null,
         ?Attempts $attempts = null,
+        ?Id $id = null
     ): self;
 
-    public function id(): Id;
+    public function id(): ?Id;
     public function firstName(): FirstName;
     public function lastName(): LastName;
     public function department(): Department;

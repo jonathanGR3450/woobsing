@@ -21,7 +21,7 @@ class ShowUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(string $id): JsonResponse
+    public function __invoke(int $id): JsonResponse
     {
         $user = $this->showUserUseCase->__invoke($id);
 

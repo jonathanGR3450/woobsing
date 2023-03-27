@@ -108,4 +108,6 @@ return [
 
     'password_timeout' => 10800,
 
+    'verify' => true, // Esta opción debe estar establecida en true
+
 ];

@@ -2,8 +2,8 @@
 
 namespace App\Domain\Employees\ValueObjects;
 
-use App\Domain\Shared\ValueObjects\UlidValueObject;
+use App\Domain\Shared\ValueObjects\IntegerValueObject;
 
-final class Id extends UlidValueObject
+final class Id extends IntegerValueObject
 {
 }

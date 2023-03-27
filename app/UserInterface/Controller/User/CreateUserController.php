@@ -23,7 +23,7 @@ class CreateUserController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $user = $this->createUserUsercase->__invoke($request->input('name'), $request->input('email'), $request->input('password'));
+        $user = $this->createUserUsercase->__invoke($request->input('name'), $request->input('email'), $request->input('phone'), $request->input('role_id'), $request->input('password'));
 
         return Response::json([
             'data' => $user->asArray()

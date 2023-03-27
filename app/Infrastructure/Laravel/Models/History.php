@@ -4,12 +4,10 @@ namespace App\Infrastructure\Laravel\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 class History extends Model
 {
-    use HasUuids;
 
     /**
      * The table associated with the model.

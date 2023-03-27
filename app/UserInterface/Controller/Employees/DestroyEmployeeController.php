@@ -22,7 +22,7 @@ class DestroyEmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(string $id)
+    public function __invoke(int $id)
     {
         $this->destroyEmployeeUseCase->__invoke($id);
 

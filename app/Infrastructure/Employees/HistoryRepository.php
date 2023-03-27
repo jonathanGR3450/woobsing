@@ -27,7 +27,6 @@ class HistoryRepository implements HistoryRepositoryInterface
     {
         $modelHistory = new ModelsHistory();
 
-        $modelHistory->id = $history->id()->value();
         $modelHistory->employee_id = $history->employeeId()->value();
         $modelHistory->created_at = DateTimeValueObject::now()->value();
 
@@ -64,10 +63,10 @@ class HistoryRepository implements HistoryRepositoryInterface
     public static function map(ModelsHistory $model): History
     {
         return History::create(
-            Id::fromPrimitives($model->id),
-            EmployeeId::fromPrimitives($model->employee_id),
+            EmployeeId::fromInteger((int) $model->employee_id),
             DateTimeValueObject::fromPrimitives($model->created_at->__toString()),
             !empty($model->updated_at) ? DateTimeValueObject::fromPrimitives($model->updated_at->__toString()) : null,
+            Id::fromInteger($model->id),
         );
     }
 }

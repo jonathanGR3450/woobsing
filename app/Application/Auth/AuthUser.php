@@ -38,9 +38,9 @@ final class AuthUser implements AuthUserInterface
         return '';
     }
 
-    public function createUser(string $name, string $email, string $password): User
+    public function createUser(string $name, string $email, string $phone, int $roleId, string $password): User
     {
-        $user = $this->createUserUseCase->__invoke($name, $email, $password);
+        $user = $this->createUserUseCase->__invoke($name, $email, $phone, $roleId, $password);
         return $user;
     }
 

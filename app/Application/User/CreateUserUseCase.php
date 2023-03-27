@@ -11,6 +11,8 @@ use App\Domain\User\ValueObjects\Email;
 use App\Domain\User\ValueObjects\Id;
 use App\Domain\User\ValueObjects\Name;
 use App\Domain\User\ValueObjects\Password;
+use App\Domain\User\ValueObjects\Phone;
+use App\Domain\User\ValueObjects\RoleId;
 
 final class CreateUserUseCase
 {
@@ -20,12 +22,13 @@ final class CreateUserUseCase
         $this->userRepositoryInterface = $userRepositoryInterface;
     }
 
-    public function __invoke(string $name, string $email, string $password): User
+    public function __invoke(string $name, string $email, string $phone, int $roleId, string $password): User
     {
         $user = User::create(
-            Id::random(),
             Email::fromString($email),
             Name::fromString($name),
+            Phone::fromString($phone),
+            RoleId::fromInteger($roleId),
             Password::fromString($password),
             DateTimeValueObject::now()
         );

@@ -25,6 +25,6 @@ class CreateEmployeeController extends Controller
     {
         $employee = $this->createEmployeeUsercase->__invoke($request->input('first_name'), $request->input('last_name'), $request->input('department'), $request->input('has_access'));
 
-        return redirect()->route('employees.index')->with('status', "Employee {$employee->id()->value()} was created success!");
+        return redirect()->route('employees.index')->with('status', "Employee {$employee->firstName()->value()} was created success!");
     }
 }

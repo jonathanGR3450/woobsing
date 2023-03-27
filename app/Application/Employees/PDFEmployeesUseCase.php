@@ -18,7 +18,7 @@ final class PDFEmployeesUseCase
         $this->indexEmployeeUseCase = $indexEmployeeUseCase;
     }
 
-    public function __invoke(?int $offset = null, ?string $first_name = null, ?string $last_name = null, ?string $department = null, ?bool $has_access = null, ?string $date_init = null, ?string $date_end = null, ?string $id = null): \Barryvdh\DomPDF\PDF
+    public function __invoke(?int $offset = null, ?string $first_name = null, ?string $last_name = null, ?string $department = null, ?bool $has_access = null, ?string $date_init = null, ?string $date_end = null, ?int $id = null): \Barryvdh\DomPDF\PDF
     {
 
         # para llamar el metodo invoke, es necesario llamarlo desde parentesis

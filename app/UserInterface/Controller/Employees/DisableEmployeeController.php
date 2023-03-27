@@ -20,7 +20,7 @@ class DisableEmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(string $id)
+    public function __invoke(int $id)
     {
         $this->disableEmployeeUseCase->__invoke($id);
 

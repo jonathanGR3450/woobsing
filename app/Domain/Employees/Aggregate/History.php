@@ -13,28 +13,28 @@ use App\UserInterface\Presenter\Histories\HistoryPresenter;
 final class History
 {
     private function __construct(
-        private Id $id,
         private EmployeeId $employee_id,
         private DateTimeValueObject $created_at,
-        private ?DateTimeValueObject $updated_at
+        private ?DateTimeValueObject $updated_at = null,
+        private ?Id $id = null,
     ) {
     }
 
     public static function create(
-        Id $id,
         EmployeeId $employee_id,
         DateTimeValueObject $created_at,
         ?DateTimeValueObject $updated_at = null,
+        ?Id $id = null,
     ): self {
         return new self(
-            $id,
             $employee_id,
             $created_at,
             $updated_at,
+            $id,
         );
     }
 
-    public function id(): Id
+    public function id(): ?Id
     {
         return $this->id;
     }
@@ -55,10 +55,6 @@ final class History
         return $this->updated_at;
     }
 
-    public function attempts(): ?Attempts
-    {
-        return $this->attempts;
-    }
 
     public function present(): HistoryPresenter
     {

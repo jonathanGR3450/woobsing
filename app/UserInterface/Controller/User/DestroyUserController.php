@@ -22,7 +22,7 @@ class DestroyUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(string $id): JsonResponse
+    public function __invoke(int $id): JsonResponse
     {
         $this->destroyUserUseCase->__invoke($id);
 

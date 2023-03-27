@@ -14,7 +14,7 @@ final class HistorySearchCriteria extends Criteria
     private ?string $date_init = null;
     private ?string $date_end = null;
 
-    public static function create(string $id, ?int $offset = null, ?string $date_init, ?string $date_end): HistorySearchCriteria
+    public static function create(int $id, ?int $offset = null, ?string $date_init, ?string $date_end): HistorySearchCriteria
     {
         $criteria = new self(
             CriteriaPagination::create(self::PAGINATION_SIZE, $offset)

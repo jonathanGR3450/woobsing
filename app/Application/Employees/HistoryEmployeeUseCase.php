@@ -20,11 +20,11 @@ final class HistoryEmployeeUseCase
         $this->historyRepositoryInterface = $historyRepositoryInterface;
     }
 
-    public function __invoke(string $id, ?int $offset = null, ?string $date_init = null, ?string $date_end = null): array
+    public function __invoke(int $id, ?int $offset = null, ?string $date_init = null, ?string $date_end = null): array
     {
         $criteria = HistorySearchCriteria::create($id, $offset, $date_init, $date_end);
         $criteria->sortBy(new CriteriaSort(CriteriaField::fromString('created_at'), CriteriaSortDirection::ASC));
-        $histories = $this->historyRepositoryInterface->historyAttemptsLoginSearchByCriteria(Id::fromPrimitives($id), $criteria);
+        $histories = $this->historyRepositoryInterface->historyAttemptsLoginSearchByCriteria(Id::fromInteger($id), $criteria);
 
         return $histories;
     }

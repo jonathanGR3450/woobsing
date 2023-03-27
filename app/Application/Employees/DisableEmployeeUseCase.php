@@ -15,9 +15,9 @@ final class DisableEmployeeUseCase
         $this->employeeRepositoryInterface = $employeeRepositoryInterface;
     }
 
-    public function __invoke(string $id): void
+    public function __invoke(int $id): void
     {
-        $employee = $this->employeeRepositoryInterface->findById(Id::fromPrimitives($id));
+        $employee = $this->employeeRepositoryInterface->findById(Id::fromInteger($id));
         $employee->updateHasAccess(!$employee->hasAccess()->value());
         $this->employeeRepositoryInterface->update($employee);
     }

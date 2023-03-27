@@ -24,7 +24,6 @@ final class CreateEmployeeUseCase
     public function __invoke(string $first_name, string $last_name, string $department, bool $has_access): Employee
     {
         $employ = Employee::create(
-            Id::random(),
             FirstName::fromString($first_name),
             LastName::fromString($last_name),
             Department::fromString($department),

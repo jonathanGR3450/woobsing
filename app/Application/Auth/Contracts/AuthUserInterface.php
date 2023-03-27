@@ -10,7 +10,7 @@ interface AuthUserInterface
 
     public function loginUserModel(User $user): string;
 
-    public function createUser(string $name, string $email, string $password): User;
+    public function createUser(string $name, string $email, string $phone, int $roleId, string $password): User;
 
     public function logout(): void;
 

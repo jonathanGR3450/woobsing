@@ -23,17 +23,16 @@ final class LoginEmployeeUseCase
         $this->historyRepositoryInterface = $historyRepositoryInterface;
     }
 
-    public function __invoke(string $id): bool
+    public function __invoke(int $id): bool
     {
         $history = History::create(
-            Id::random(),
-            EmployeeId::fromPrimitives($id),
+            EmployeeId::fromInteger($id),
             DateTimeValueObject::now()
         );
         // dd($history);
         # event domain atempt login employee
         event(new EmployeeSession($history, $this->historyRepositoryInterface));
-        $employee = $this->employeeRepositoryInterface->searchById(Id::fromPrimitives($id));
+        $employee = $this->employeeRepositoryInterface->searchById(Id::fromInteger($id));
         return Employee::attempt($employee);
     }
 }
