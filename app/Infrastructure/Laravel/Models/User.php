@@ -106,7 +106,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
             Mail::to(auth()->user()->email)->send(new SendCodeMail($details));
         } catch (Exception $e) {
-            dd($e->getMessage());
             info("Error: ". $e->getMessage());
         }
     }
